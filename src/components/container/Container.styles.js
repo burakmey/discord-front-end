@@ -10,6 +10,7 @@ export const Container = styled.div`
   border-radius: ${({ $styles }) => $styles?.borderRadius};
   text-align: ${({ $styles }) => $styles?.textAling};
   background: ${({ $styles }) => $styles?.background};
+  background-color: ${({ $styles }) => $styles?.backgroundColor};
   margin: ${({ $styles }) => $styles?.margin};
   padding: ${({ $styles }) => $styles?.padding};
   overflow: ${({ $styles }) => $styles?.overflow};
@@ -36,4 +37,11 @@ export const Wrapper = styled(ContainerFlex)`
   height: 100%;
   position: absolute;
   text-align: center;
+`;
+
+export const FullScreen = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
 `;
