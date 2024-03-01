@@ -5,6 +5,9 @@ import { TextHeader, TextLabel, TextNormal, TextSpan } from "../components/text/
 import { ButtonLarge, ButtonLink } from "../components/button/Button";
 import { InputForm } from "../components/input/Input";
 import styled from "styled-components";
+import { useAuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+// import * as signalR from "@microsoft/signalr";
 
 const CharacterBackground = styled.svg`
   position: fixed;
@@ -66,20 +69,30 @@ function Login() {
 
   const form = useForm();
   const { register, handleSubmit } = form;
+  const { authData, setAuthData } = useAuthContext();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    fetch(process.env.REACT_APP_FETCH_URL, {
+    await fetch(process.env.REACT_APP_USER_LOGIN_URL, {
       method: "POST",
-      headers: { Accept: "application/json", "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: data.emailOrPhone, password: data.password }),
-    })
-      .then((result) => result.json())
-      .then((data) => console.log(data));
+    }).then((response) => {
+      if (response.ok)
+        response.json().then((result) => {
+          setAuthData(result);
+          navigate("/user", { replace: true });
+        });
+      else response.json().then((errorMessage) => console.error(errorMessage));
+    });
   };
 
   useEffect(() => {
+    if (authData !== null) {
+      navigate("/user", { replace: true });
+    }
     return () => console.log("Login unmounted!");
-  }, []);
+  }, [navigate, authData]);
 
   return (
     <Container $styles={{ position: "relative", width: "100vw", minHeight: "100vh", overflow: "auto" }}>
