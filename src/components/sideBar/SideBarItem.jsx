@@ -41,27 +41,26 @@ function SideBarItem({ id }) {
     return () => console.log("SideBarItem unmounted!");
   }, []);
 
-  const setHover = () => {
-    setIsHover((prev) => !prev);
+  const onMouseEnter = () => {
+    if (activeItem.id !== id) setIsHover((prev) => !prev);
+    // console.log("onMouseEnter");
   };
-
+  const onMouseLeave = () => {
+    if (activeItem.id !== id) setIsHover((prev) => !prev);
+    // console.log("onMouseLeave");
+  };
   const onClick = () => {
     activeItem.id = id;
     activeItem.ref.current((prev) => !prev);
     setIsActive((prev) => !prev);
-    setHover();
+    setIsHover((prev) => !prev);
   };
 
   return (
     <ItemBlock>
       {activeItem.id === id ? <ItemSelector $height={40} /> : null}
       {isHover ? <ItemSelector $height={20} /> : null}
-      <Item
-        $isActive={isActive || isHover}
-        onMouseEnter={activeItem.id !== id ? setHover : undefined}
-        onMouseLeave={activeItem.id !== id ? setHover : undefined}
-        onClick={onClick}
-      />
+      <Item $isActive={isActive || isHover} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={activeItem.id !== id ? onClick : undefined} />
     </ItemBlock>
   );
 }
