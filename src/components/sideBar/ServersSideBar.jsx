@@ -2,31 +2,6 @@ import { useEffect } from "react";
 import SideBarItem from "./SideBarItem";
 import styled from "styled-components";
 
-const SideBar = styled.nav`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 72px;
-  height: 100%;
-  align-items: center;
-  padding: 12px 0 4px;
-  list-style-type: none;
-`;
-const SideBarScroller = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 64px;
-  overflow: hidden scroll;
-  scrollbar-width: none;
-`;
-const Separator = styled.div`
-  width: 32px;
-  min-height: 2px;
-  border-radius: 1px;
-  margin: 0 0 8px 0;
-  background-color: var(--background-modifier-accent);
-`;
-
 function ServersSideBar() {
   console.log("ServersSideBar rendered!");
 
@@ -51,3 +26,28 @@ function ServersSideBar() {
 }
 
 export default ServersSideBar;
+
+const SideBar = styled.nav`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 72px;
+  height: 100%;
+  align-items: center;
+  padding: 12px 0 4px;
+  list-style-type: none;
+`;
+const SideBarScroller = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 64px;
+  overflow: hidden scroll;
+  scrollbar-width: none;
+`;
+const Separator = styled.div`
+  width: 32px;
+  min-height: 2px;
+  border-radius: 1px;
+  margin: 0 0 8px 0;
+  background-color: var(--background-modifier-accent);
+`;
